@@ -8,8 +8,7 @@
     <canvas id="myCanvas" width="1200" height="500"></canvas>
 
     <script>
-
-    var Character_state = 0; //if 0 = no keyinput if 1 = keyinput
+    
     var canvas; // canvas object has block, coin and character instance reference (Directed assosiation relaition)
 
 
@@ -76,6 +75,7 @@
     }
 
     function Character (x, y, width, height, identity) {
+      this.Character_state = 0; //if 0 = no keyinput if 1 = keyinput
       this.x = x;
       this.y = y;
       this.width = width;
@@ -88,7 +88,7 @@
       }
 
       this.move = function () { // if no keyinput and character is not at the bottom, character moves to bottom
-        if (Character_state == 0) {
+        if (this.Character_state == 0) {
           if ((this.y + this.height) < 500) {
             this.y += 2;
           }
@@ -99,11 +99,11 @@
       };
 
       this.character_state_on  = function () {
-          Character_state = 1;
+          this.Character_state = 1;
       };
 
       this.character_state_off = function () {
-          Character_state = 0;
+          this.Character_state = 0;
       };
     }
 
