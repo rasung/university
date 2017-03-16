@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart(date_sensorvalue) {
+                var data = google.visualization.arrayToDataTable(date_sensorvalue);
+
+                var options = {
+                    title: 'temperature sensorvalue',
+                    curveType: 'function',
+                    legend: { position: 'bottom' }
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+                chart.draw(data, options);
+            }
+            $(document).ready(function(){
+                $('#button1').click(function(){
+                    var select = $('#select1').val();
+                    var years = $('#years1').val();
+                    var months = $('#months1').val();
+                    var days = $('#days1').val();
+
+                    $.post( 'http://localhost:3000/all_equip', { select: select, year : years, month : months, day : days}).done(function( data ) {
+                        if( data.length == 1)
+                        {
+                            alert('해당 날짜는 데이터가 없습니다.');
+                        }
+                            
+                        else
+                        {
+                            drawChart(data);
+                        }
+                    });
+                });
+
+                $('#button2').click(function(){
+                    var select = $('#select2').val();
+                    var years = $('#years2').val();
+                    var months = $('#months2').val();
+                    var days = $('#days2').val();
+
+                    $.post( 'http://localhost:3000/one_equip', { select: select, year : years, month : months, day : days}).done(function( data ) {
+                        if( data.length == 1)
+                        {
+                            alert('해당 날짜는 데이터가 없습니다.');
+                        }
+                            
+                        else
+                        {
+                            drawChart(data);
+                        }
+                    });
+                });
+            });
+        </script>
+        <title>인포빌 - 대량 데이터 모니터링</title>
+    </head>
+    <body>
+        <p>전체 위치 온도</p>
+        <form enctype="application/x-www-form-urlencoded">
+            <select name="select" form="hour" id="select1">
+                <option value="hour">시간단위</option>
+                <option value="day">일단위</option>
+                <option value="month">월단위</option>
+            </select>
+            <select name="year" form="hour" id="years1">
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+            </select>
+            <select name="month" form="hour" id="months1">
+                <option value="1">01</option>
+                <option value="2">02</option>
+                <option value="3">03</option>
+                <option value="4">04</option>
+                <option value="5">05</option>
+                <option value="6">06</option>
+                <option value="7">07</option>
+                <option value="8">08</option>
+                <option value="9">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <select name="day" form="hour" id="days1">
+                <option value="1">01</option>
+                <option value="2">02</option>
+                <option value="3">03</option>
+                <option value="4">04</option>
+                <option value="5">05</option>
+                <option value="6">06</option>
+                <option value="7">07</option>
+                <option value="8">08</option>
+                <option value="9">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+            </select>
+            <input type="button" id="button1" value="검색">
+        </form>
+
+        <p>특정 위치 온도</p>
+        <form method="post" enctype="application/x-www-form-urlencoded">
+            <select name="select" form="hour" id="select2">
+                <option value="외천초">외천초</option>
+                <option value="길자원">길자원</option>
+                <option value="창무산업">창무산업</option>
+                <option value="대성DA">대성DA</option>
+                <option value="동청주지사">동청주지사</option>
+                <option value="한국JCC_2공장">한국JCC_2공장</option>
+                <option value="현대백화점_쇼핑몰동">현대백화점_쇼핑몰동</option>
+                <option value="현대백화점동">현대백화점동</option>
+                <option value="미래제주">미래제주</option>
+            </select>
+            <select name="year" form="hour" id="years2">
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+            </select>
+            <select name="month" form="hour" id="months2">
+                <option value="1">01</option>
+                <option value="2">02</option>
+                <option value="3">03</option>
+                <option value="4">04</option>
+                <option value="5">05</option>
+                <option value="6">06</option>
+                <option value="7">07</option>
+                <option value="8">08</option>
+                <option value="9">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <select name="day" form="hour" id="days2">
+                <option value="1">01</option>
+                <option value="2">02</option>
+                <option value="3">03</option>
+                <option value="4">04</option>
+                <option value="5">05</option>
+                <option value="6">06</option>
+                <option value="7">07</option>
+                <option value="8">08</option>
+                <option value="9">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+            </select>
+            <input type="button" id="button2" value="검색">
+        </form>
+
+        <div id="curve_chart" style="width: 1300px; height: 450px"></div>
+
+    </body>
+</html>
