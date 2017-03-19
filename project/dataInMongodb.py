@@ -260,17 +260,17 @@ rst_name = ["BODY", "R", "S", "T"]
 start_date = "2016-09-22 00:00:00"
 finish_date = "2017-03-09 00:00:00"
 
-#for i in location_list_in_mongodb:
-#    save_max_value_among_rst(i, start_date, finish_date)
+for i in location_list_in_mongodb:
+    save_max_value_among_rst(i, start_date, finish_date)
 
-#for i in location_list_in_mongodb:
-#    save_max_value_among_equip(i, start_date, finish_date)
+for i in location_list_in_mongodb:
+    save_max_value_among_equip(i, start_date, finish_date)
 
-#save_max_value_for_hour_graph(start_date, finish_date, location_list_in_mongodb)
+save_max_value_for_hour_graph(start_date, finish_date, location_list_in_mongodb)
 
-#save_max_value_for_day_graph(start_date, finish_date, location_list_in_mongodb)
+save_max_value_for_day_graph(start_date, finish_date, location_list_in_mongodb)
 
-# 아래 함수는 월간 단위 라서 01일로 지정해줘야 한다.
-#save_max_value_for_month_graph("2016-09-01 00:00:00", "2017-04-01 00:00:00", location_list_in_mongodb)
+# 월간 단위 라서 01일로 지정해줘야 한다.
+save_max_value_for_month_graph("2016-09-01 00:00:00", "2017-04-01 00:00:00", location_list_in_mongodb)
 
 save_max_value_for_oneEquip(location_list_in_mongodb, start_date, finish_date)
